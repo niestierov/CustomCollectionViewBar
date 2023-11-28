@@ -9,11 +9,12 @@ import UIKit
 
 final class CustomCollectionViewBar: UICollectionView {
     private enum Constant {
-        static let viewBackgroundColor = UIColor.darkGray
+        static let defaultMinimumLineSpacing: CGFloat = 5
         static let itemInset: CGFloat = 30
-        static let sectionInset: CGFloat = 5
-        static let defaultMinimumInteritemSpacing: CGFloat = 5
+        static let sectionInset: CGFloat = 10
+        static let viewBackgroundColor = UIColor.darkGray
         static let barTitleFontSize: CGFloat = 17
+        static let maximumFullscreenTabsCount = 3
         static let selectionIndicatorMinimumWidth: CGFloat = 35
         static let selectionIndicatorCornerRadius: CGFloat = 2
         static let selectionIndicatorHeight: CGFloat = 5
@@ -30,8 +31,7 @@ final class CustomCollectionViewBar: UICollectionView {
     private var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = .zero
-        layout.minimumInteritemSpacing = Constant.defaultMinimumInteritemSpacing
+        layout.minimumLineSpacing = Constant.defaultMinimumLineSpacing
         return layout
     }()
     private lazy var selectionIndicatorView: UIView = {
@@ -107,6 +107,16 @@ private extension CustomCollectionViewBar {
         max(determineTitleWidth(for: title), Constant.selectionIndicatorMinimumWidth)
     }
     
+    func determineTitleWidthForFullscreen() -> CGFloat {
+        let tabsCount = CGFloat(barTitles.count)
+        let itemSpacing = Constant.defaultMinimumLineSpacing * (tabsCount - 1)
+        let sectionSpacing = Constant.sectionInset * 2
+        let totalSpacing = itemSpacing + sectionSpacing
+        let width = UIScreen.main.bounds.width
+        
+        return (width - totalSpacing) / CGFloat(barTitles.count)
+    }
+    
     func calculateIndicatorFrame(for cell: UICollectionViewCell, titleWidth: CGFloat) -> CGRect {
         let indicatorX = cell.center.x - titleWidth / 2
         let indicatorY = cell.frame.origin.y + cell.frame.height - Constant.selectionIndicatorHeight
@@ -144,10 +154,16 @@ private extension CustomCollectionViewBar {
         updateIndicatorPositionIfNeeded(for: cell, title: title, isNeeded: isSelected)
     }
     
-    func calculateItemSizeWithInsets(for title: String) -> CGSize {
-        let width = determineTitleWidth(for: title)  + Constant.itemInset
+    func calculateNeededItemSize(for title: String) -> CGSize {
+        let itemWidth: CGFloat
         
-        return CGSize(width: width, height: frame.height)
+        if barTitles.count > Constant.maximumFullscreenTabsCount {
+            itemWidth = determineTitleWidth(for: title) + Constant.itemInset
+        } else {
+            itemWidth = determineTitleWidthForFullscreen()
+        }
+        
+        return CGSize(width: itemWidth, height: frame.height)
     }
 }
 
@@ -197,7 +213,7 @@ extension CustomCollectionViewBar: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let title = barTitles[indexPath.item]
-        return calculateItemSizeWithInsets(for: title)
+        return calculateNeededItemSize(for: title)
     }
     
     func collectionView(
