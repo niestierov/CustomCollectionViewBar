@@ -17,7 +17,7 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewBarCell"
     
-    // MARK: - UIComponents -
+    // MARK: - UI Components -
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -29,7 +29,7 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
         return label
     }()
     
-    // MARK: - LifeCycle -
+    // MARK: - Life Cycle -
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +43,7 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
         setupView()
     }
 
-    // MARK: - Iternal -
+    // MARK: - Internal -
     
     func configure(title: String, isSelected: Bool) {
         titleLabel.text = title

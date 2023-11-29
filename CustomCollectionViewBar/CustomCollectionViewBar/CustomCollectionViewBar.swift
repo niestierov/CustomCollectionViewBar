@@ -10,8 +10,7 @@ import UIKit
 final class CustomCollectionViewBar: UICollectionView {
     private enum Constant {
         static let defaultMinimumLineSpacing: CGFloat = 5
-        static let itemInset: CGFloat = 30
-        static let sectionInset: CGFloat = 10
+        static let itemInset: CGFloat = 35
         static let viewBackgroundColor = UIColor.darkGray
         static let barTitleFontSize: CGFloat = 17
         static let maximumFullscreenTabsCount = 3
@@ -26,7 +25,7 @@ final class CustomCollectionViewBar: UICollectionView {
     private var barTitles: [String] = []
     private var selectedIndex: Int = .zero
     
-    // MARK: - UIComponents -
+    // MARK: - UI Components -
     
     private var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -43,7 +42,7 @@ final class CustomCollectionViewBar: UICollectionView {
         return view
     }()
     
-    // MARK: - LifeCycle -
+    // MARK: - Life Cycle -
     
     init() {
         super.init(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
@@ -107,14 +106,12 @@ private extension CustomCollectionViewBar {
         max(determineTitleWidth(for: title), Constant.selectionIndicatorMinimumWidth)
     }
     
-    func determineTitleWidthForFullscreen() -> CGFloat {
+    func determineItemWidthForFullscreen() -> CGFloat {
         let tabsCount = CGFloat(barTitles.count)
         let itemSpacing = Constant.defaultMinimumLineSpacing * (tabsCount - 1)
-        let sectionSpacing = Constant.sectionInset * 2
-        let totalSpacing = itemSpacing + sectionSpacing
         let width = UIScreen.main.bounds.width
         
-        return (width - totalSpacing) / CGFloat(barTitles.count)
+        return (width - itemSpacing) / CGFloat(barTitles.count)
     }
     
     func calculateIndicatorFrame(for cell: UICollectionViewCell, titleWidth: CGFloat) -> CGRect {
@@ -139,7 +136,6 @@ private extension CustomCollectionViewBar {
         }
 
         let titleWidth = determineOptimalTitleWidth(for: title)
-
         let indicatorFrame = calculateIndicatorFrame(for: cell, titleWidth: titleWidth)
 
         changeIndicatorPositionWithAnimation(frame: indicatorFrame)
@@ -160,7 +156,7 @@ private extension CustomCollectionViewBar {
         if barTitles.count > Constant.maximumFullscreenTabsCount {
             itemWidth = determineTitleWidth(for: title) + Constant.itemInset
         } else {
-            itemWidth = determineTitleWidthForFullscreen()
+            itemWidth = determineItemWidthForFullscreen()
         }
         
         return CGSize(width: itemWidth, height: frame.height)
@@ -212,20 +208,6 @@ extension CustomCollectionViewBar: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let title = barTitles[indexPath.item]
-        return calculateNeededItemSize(for: title)
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-    ) -> UIEdgeInsets {
-        return UIEdgeInsets(
-            top: .zero,
-            left: Constant.sectionInset,
-            bottom: .zero,
-            right: Constant.sectionInset
-        )
+        return calculateNeededItemSize(for: barTitles[indexPath.item])
     }
 }
