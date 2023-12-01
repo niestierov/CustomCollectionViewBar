@@ -9,7 +9,7 @@ import UIKit
 
 final class MainScreen: UIViewController {
     private enum Constant {
-        static let collectionViewHeight: CGFloat = 50
+        static let tabViewHeight: CGFloat = 50
         
         enum Title {
             static let allTitle = "All"
@@ -40,7 +40,7 @@ final class MainScreen: UIViewController {
         return view
     }()
     
-    // MARK: - LifeCycle -
+    // MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ final class MainScreen: UIViewController {
             tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tabView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tabView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tabView.heightAnchor.constraint(equalToConstant: Constant.collectionViewHeight)
+            tabView.heightAnchor.constraint(equalToConstant: Constant.tabViewHeight)
         ])
     }
 }

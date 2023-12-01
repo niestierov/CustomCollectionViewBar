@@ -1,6 +1,6 @@
 //
-//  CustomCollectionViewBar.swift
-//  CustomCollectionViewBar
+//  CustomTabView.swift
+//  CustomTabView
 //
 //  Created by Denys Niestierov on 16.11.2023.
 //
@@ -43,6 +43,9 @@ final class CustomTabView: UIView {
             forCellWithReuseIdentifier: CustomTabViewCell.identifier
         )
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .darkGray
+        view.bounces = false
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     private lazy var selectionIndicatorView: UIView = {
@@ -74,27 +77,29 @@ final class CustomTabView: UIView {
     
     // MARK: - Internal -
     
-    func configure(with tabs: [String]) {
-        self.tabsList = tabs
+    func configure(with tabsList: [String]) {
+        self.tabsList = tabsList
         collectionView.reloadData()
     }
     
     func configureCollectionView(
-        backgroundColor: UIColor = .darkGray,
         showsHorizontalScrollIndicator: Bool = false,
         bounces: Bool = false
     ) {
-        collectionView.backgroundColor = backgroundColor
         collectionView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
         collectionView.bounces = bounces
     }
     
-    func configureTabColorsWith(defaultStateColor: UIColor, selectedStateColor: UIColor) {
+    func setBackgroundColor(with backgroundColor: UIColor) {
+        collectionView.backgroundColor = backgroundColor
+    }
+    
+    func setTabColorsWith(defaultStateColor: UIColor, selectedStateColor: UIColor) {
         selectedCellTextColor = selectedStateColor
         defaultCellTextColor = defaultStateColor
     }
     
-    func configureSelectionIndicatorColor(with color: UIColor) {
+    func setIndicatorColor(with color: UIColor) {
         selectionIndicatorView.backgroundColor = color
     }
 }
@@ -113,8 +118,6 @@ private extension CustomTabView {
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
-        
-        configureCollectionView()
     }
     
     func updateIndicatorPositionWithAnimation(frame: CGRect) {

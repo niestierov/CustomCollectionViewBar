@@ -1,6 +1,6 @@
 //
-//  CustomCollectionViewBarCell.swift
-//  CustomCollectionViewBar
+//  CustomTabViewCell.swift
+//  CustomTabView
 //
 //  Created by Denys Niestierov on 16.11.2023.
 //
