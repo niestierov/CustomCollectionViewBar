@@ -20,6 +20,8 @@ final class MainScreen: UIViewController {
         }
     }
     
+    // MARK: - Properties -
+    
     private let tabsList = [
         Constant.Title.allTitle,
         Constant.Title.friendsTitle,
@@ -29,7 +31,7 @@ final class MainScreen: UIViewController {
         Constant.Title.universityTitle
     ]
     
-    // MARK: - Properties -
+    // MARK: - UI Components -
     
     private lazy var tabView: CustomTabView = {
         let view = CustomTabView()
@@ -45,6 +47,8 @@ final class MainScreen: UIViewController {
         
         setupTabView()
     }
+    
+    // MARK: - Private -
     
     private func setupTabView() {
         view.addSubview(tabView)

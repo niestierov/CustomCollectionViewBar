@@ -117,7 +117,7 @@ private extension CustomTabView {
         configureCollectionView()
     }
     
-    func changeIndicatorPositionWithAnimation(frame: CGRect) {
+    func updateIndicatorPositionWithAnimation(frame: CGRect) {
         DispatchQueue.main.async {
             UIView.animate(withDuration: Constant.selectionIndicatorAnimationTime) {
                 self.selectionIndicatorView.frame = frame
@@ -174,7 +174,7 @@ private extension CustomTabView {
         let titleWidth = determineOptimalTitleWidth(for: title)
         let indicatorFrame = calculateIndicatorFrame(for: cell, titleWidth: titleWidth)
 
-        changeIndicatorPositionWithAnimation(frame: indicatorFrame)
+        updateIndicatorPositionWithAnimation(frame: indicatorFrame)
     }
     
     func configureCell(_ cell: CustomTabViewCell, at indexPath: IndexPath) {

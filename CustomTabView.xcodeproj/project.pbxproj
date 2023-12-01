@@ -61,8 +61,7 @@
 				9A0CC0382B064CF4003C2E4B /* App */,
 				9A0CC0452B065ED9003C2E4B /* Scenes */,
 				9A0CC03F2B06512E003C2E4B /* CustomTabViewCell */,
-				9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */,
-				9A0CC02F2B064CEB003C2E4B /* LaunchScreen.storyboard */,
+				9A9D54FE2B1A1F83004E45AF /* Supporting */,
 				9A0CC0322B064CEB003C2E4B /* Info.plist */,
 			);
 			path = CustomTabView;
@@ -100,6 +99,15 @@
 				9A0CC0462B065EF0003C2E4B /* MainScreen.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		9A9D54FE2B1A1F83004E45AF /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */,
+				9A0CC02F2B064CEB003C2E4B /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,8 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9A2Y9UTZLK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomCollectionViewBar/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Co;
+				INFOPLIST_FILE = CustomTabView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -328,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomCollectionViewBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomTabView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -345,8 +352,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9A2Y9UTZLK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomCollectionViewBar/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Co;
+				INFOPLIST_FILE = CustomTabView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -356,7 +362,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomCollectionViewBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomTabView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
