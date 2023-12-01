@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomCollectionViewBarCell: UICollectionViewCell {
+final class CustomTabViewCell: UICollectionViewCell {
     private enum Constant {
         static let titleFontSize: CGFloat = 17
         static let titleNumberOfLines = 1
@@ -15,7 +15,7 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
     
     // MARK: - Properties -
     
-    static let identifier = "CustomCollectionViewBarCell"
+    static let identifier = "CustomTabViewCell"
     
     // MARK: - UI Components -
 
@@ -58,7 +58,7 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
 
 // MARK: - Private -
 
-private extension CustomCollectionViewBarCell {
+private extension CustomTabViewCell {
     func setupView() {
         contentView.addSubview(titleLabel)
         

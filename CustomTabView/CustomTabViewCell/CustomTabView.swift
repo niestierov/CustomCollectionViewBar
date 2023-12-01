@@ -39,8 +39,8 @@ final class CustomTabView: UIView {
         view.delegate = self
         view.dataSource = self
         view.register(
-            CustomCollectionViewBarCell.self,
-            forCellWithReuseIdentifier: CustomCollectionViewBarCell.identifier
+            CustomTabViewCell.self,
+            forCellWithReuseIdentifier: CustomTabViewCell.identifier
         )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -177,7 +177,7 @@ private extension CustomTabView {
         changeIndicatorPositionWithAnimation(frame: indicatorFrame)
     }
     
-    func configureCell(_ cell: CustomCollectionViewBarCell, at indexPath: IndexPath) {
+    func configureCell(_ cell: CustomTabViewCell, at indexPath: IndexPath) {
         let title = tabsList[indexPath.item]
         let isSelected = selectedIndex == indexPath.item
         
@@ -219,9 +219,9 @@ extension CustomTabView: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CustomCollectionViewBarCell.identifier,
+            withReuseIdentifier: CustomTabViewCell.identifier,
             for: indexPath
-        ) as! CustomCollectionViewBarCell
+        ) as! CustomTabViewCell
         
         configureCell(cell, at: indexPath)
         
