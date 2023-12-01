@@ -7,11 +7,10 @@
 
 import UIKit
 
-final class CustomCollectionViewBar: UICollectionView {
+final class CustomTabView: UIView {
     private enum Constant {
         static let defaultMinimumLineSpacing: CGFloat = 5
         static let itemInset: CGFloat = 35
-        static let viewBackgroundColor = UIColor.darkGray
         static let barTitleFontSize: CGFloat = 17
         static let maximumFullscreenTabsCount = 3
         static let selectionIndicatorMinimumWidth: CGFloat = 35
@@ -22,8 +21,10 @@ final class CustomCollectionViewBar: UICollectionView {
     
     // MARK: - Properties -
     
-    private var barTitles: [String] = []
+    private var tabsList: [String] = []
     private var selectedIndex: Int = .zero
+    private var selectedCellTextColor: UIColor = .cyan
+    private var defaultCellTextColor: UIColor = .white
     
     // MARK: - UI Components -
     
@@ -32,6 +33,17 @@ final class CustomCollectionViewBar: UICollectionView {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = Constant.defaultMinimumLineSpacing
         return layout
+    }()
+    private lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        view.delegate = self
+        view.dataSource = self
+        view.register(
+            CustomCollectionViewBarCell.self,
+            forCellWithReuseIdentifier: CustomCollectionViewBarCell.identifier
+        )
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     private lazy var selectionIndicatorView: UIView = {
         let view = UIView(frame: .zero)
@@ -44,47 +56,65 @@ final class CustomCollectionViewBar: UICollectionView {
     
     // MARK: - Life Cycle -
     
-    init() {
-        super.init(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+    convenience init() {
+        self.init(frame: .zero)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setupCollectionView()
-        setupSelectionIndicatorView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         setupCollectionView()
-        setupSelectionIndicatorView()
     }
     
     // MARK: - Internal -
     
-    func setupTabs(barTitles: [String]) {
-        self.barTitles = barTitles
-        self.reloadData()
+    func configure(with tabs: [String]) {
+        self.tabsList = tabs
+        collectionView.reloadData()
+    }
+    
+    func configureCollectionView(
+        backgroundColor: UIColor = .darkGray,
+        showsHorizontalScrollIndicator: Bool = false,
+        bounces: Bool = false
+    ) {
+        collectionView.backgroundColor = backgroundColor
+        collectionView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
+        collectionView.bounces = bounces
+    }
+    
+    func configureTabColorsWith(defaultStateColor: UIColor, selectedStateColor: UIColor) {
+        selectedCellTextColor = selectedStateColor
+        defaultCellTextColor = defaultStateColor
+    }
+    
+    func configureSelectionIndicatorColor(with color: UIColor) {
+        selectionIndicatorView.backgroundColor = color
     }
 }
 
 // MARK: - Private -
 
-private extension CustomCollectionViewBar {
+private extension CustomTabView {
     func setupCollectionView() {
-        delegate = self
-        dataSource = self
+        addSubview(collectionView)
         
-        register(
-            CustomCollectionViewBarCell.self,
-            forCellWithReuseIdentifier: CustomCollectionViewBarCell.identifier
-        )
+        collectionView.addSubview(selectionIndicatorView)
         
-        backgroundColor = Constant.viewBackgroundColor
-        showsHorizontalScrollIndicator = false
-        bounces = false
-    }
-    
-    func setupSelectionIndicatorView() {
-        addSubview(selectionIndicatorView)
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        
+        configureCollectionView()
     }
     
     func changeIndicatorPositionWithAnimation(frame: CGRect) {
@@ -96,10 +126,16 @@ private extension CustomCollectionViewBar {
     }
     
     func determineTitleWidth(for title: String) -> CGFloat {
+        let maxSize = CGSize(width: .greatestFiniteMagnitude, height: self.frame.height)
         let font = UIFont.systemFont(ofSize: Constant.barTitleFontSize, weight: .medium)
-        let textSize = title.size(withAttributes: [.font: font])
+
+        let boundingRect = title.boundingRect(
+            with: maxSize,
+            attributes: [.font: font],
+            context: nil
+        )
         
-        return textSize.width
+        return boundingRect.width
     }
     
     func determineOptimalTitleWidth(for title: String) -> CGFloat {
@@ -107,11 +143,11 @@ private extension CustomCollectionViewBar {
     }
     
     func determineItemWidthForFullscreen() -> CGFloat {
-        let tabsCount = CGFloat(barTitles.count)
+        let tabsCount = CGFloat(tabsList.count)
         let itemSpacing = Constant.defaultMinimumLineSpacing * (tabsCount - 1)
         let width = UIScreen.main.bounds.width
         
-        return (width - itemSpacing) / CGFloat(barTitles.count)
+        return (width - itemSpacing) / CGFloat(tabsList.count)
     }
     
     func calculateIndicatorFrame(for cell: UICollectionViewCell, titleWidth: CGFloat) -> CGRect {
@@ -142,10 +178,15 @@ private extension CustomCollectionViewBar {
     }
     
     func configureCell(_ cell: CustomCollectionViewBarCell, at indexPath: IndexPath) {
-        let title = barTitles[indexPath.item]
+        let title = tabsList[indexPath.item]
         let isSelected = selectedIndex == indexPath.item
         
-        cell.configure(title: title, isSelected: isSelected)
+        cell.configure(
+            title: title,
+            isSelected: isSelected,
+            selectedStateColor: selectedCellTextColor,
+            defaultStateColor: defaultCellTextColor
+        )
         
         updateIndicatorPositionIfNeeded(for: cell, title: title, isNeeded: isSelected)
     }
@@ -153,7 +194,7 @@ private extension CustomCollectionViewBar {
     func calculateNeededItemSize(for title: String) -> CGSize {
         let itemWidth: CGFloat
         
-        if barTitles.count > Constant.maximumFullscreenTabsCount {
+        if tabsList.count > Constant.maximumFullscreenTabsCount {
             itemWidth = determineTitleWidth(for: title) + Constant.itemInset
         } else {
             itemWidth = determineItemWidthForFullscreen()
@@ -165,12 +206,12 @@ private extension CustomCollectionViewBar {
 
 // MARK: - UICollectionViewDataSource -
 
-extension CustomCollectionViewBar: UICollectionViewDataSource {
+extension CustomTabView: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        barTitles.count
+        tabsList.count
     }
     
     func collectionView(
@@ -190,7 +231,7 @@ extension CustomCollectionViewBar: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate -
 
-extension CustomCollectionViewBar: UICollectionViewDelegate {
+extension CustomTabView: UICollectionViewDelegate {
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -202,12 +243,12 @@ extension CustomCollectionViewBar: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout -
 
-extension CustomCollectionViewBar: UICollectionViewDelegateFlowLayout {
+extension CustomTabView: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return calculateNeededItemSize(for: barTitles[indexPath.item])
+        return calculateNeededItemSize(for: tabsList[indexPath.item])
     }
 }

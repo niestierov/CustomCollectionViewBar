@@ -20,10 +20,20 @@ final class MainScreen: UIViewController {
         }
     }
     
+    private let tabsList = [
+        Constant.Title.allTitle,
+        Constant.Title.friendsTitle,
+        Constant.Title.groupsTitle,
+        Constant.Title.friendsTitle,
+        Constant.Title.workTitle,
+        Constant.Title.universityTitle
+    ]
+    
     // MARK: - Properties -
     
-    private lazy var collectionView: CustomCollectionViewBar = {
-        let view = CustomCollectionViewBar()
+    private lazy var tabView: CustomTabView = {
+        let view = CustomTabView()
+        view.configure(with: tabsList)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,28 +43,17 @@ final class MainScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionView()
+        setupTabView()
     }
     
-    private func setupCollectionView() {
-        view.addSubview(collectionView)
+    private func setupTabView() {
+        view.addSubview(tabView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: Constant.collectionViewHeight)
+            tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tabView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tabView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            tabView.heightAnchor.constraint(equalToConstant: Constant.collectionViewHeight)
         ])
-
-        let barTitles = [
-            Constant.Title.allTitle,
-            Constant.Title.friendsTitle,
-            Constant.Title.groupsTitle,
-            Constant.Title.friendsTitle,
-            Constant.Title.workTitle,
-            Constant.Title.universityTitle
-        ]
-        
-        collectionView.setupTabs(barTitles: barTitles)
     }
 }

@@ -45,9 +45,14 @@ final class CustomCollectionViewBarCell: UICollectionViewCell {
 
     // MARK: - Internal -
     
-    func configure(title: String, isSelected: Bool) {
+    func configure(
+        title: String,
+        isSelected: Bool,
+        selectedStateColor: UIColor,
+        defaultStateColor: UIColor
+    ) {
         titleLabel.text = title
-        titleLabel.textColor = isSelected ? .cyan : .white
+        titleLabel.textColor = isSelected ? selectedStateColor : defaultStateColor
     }
 }
 
