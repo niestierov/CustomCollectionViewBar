@@ -60,7 +60,7 @@
 			children = (
 				9A0CC0382B064CF4003C2E4B /* App */,
 				9A0CC0452B065ED9003C2E4B /* Scenes */,
-				9A0CC03F2B06512E003C2E4B /* CustomTabViewCell */,
+				9A0CC03F2B06512E003C2E4B /* CustomTabView */,
 				9A9D54FE2B1A1F83004E45AF /* Supporting */,
 				9A0CC0322B064CEB003C2E4B /* Info.plist */,
 			);
@@ -76,13 +76,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		9A0CC03F2B06512E003C2E4B /* CustomTabViewCell */ = {
+		9A0CC03F2B06512E003C2E4B /* CustomTabView */ = {
 			isa = PBXGroup;
 			children = (
 				9A0CC0402B06512E003C2E4B /* CustomTabView.swift */,
 				9A0CC0412B06512E003C2E4B /* Cell */,
 			);
-			path = CustomTabViewCell;
+			path = CustomTabView;
 			sourceTree = "<group>";
 		};
 		9A0CC0412B06512E003C2E4B /* Cell */ = {

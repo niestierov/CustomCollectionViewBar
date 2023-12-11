@@ -8,34 +8,39 @@
 import UIKit
 
 final class MainScreen: UIViewController {
-    private enum Constant {
+    
+    private struct Constant {
         static let tabViewHeight: CGFloat = 50
         
-        enum Title {
+        struct TabsList {
             static let allTitle = "All"
             static let friendsTitle = "Friends"
             static let workTitle = "Work"
             static let universityTitle = "UniversityUniversity"
             static let groupsTitle = "Groups"
         }
+        
+        static let defaultTabsList = [
+            Constant.TabsList.allTitle,
+            Constant.TabsList.friendsTitle,
+            Constant.TabsList.groupsTitle,
+            Constant.TabsList.workTitle,
+            Constant.TabsList.universityTitle,
+            Constant.TabsList.groupsTitle,
+            Constant.TabsList.universityTitle,
+        ]
+        
+        static let smallTabsList = [
+            Constant.TabsList.allTitle,
+            Constant.TabsList.friendsTitle,
+            Constant.TabsList.groupsTitle
+        ]
     }
-    
-    // MARK: - Properties -
-    
-    private let tabsList = [
-        Constant.Title.allTitle,
-        Constant.Title.friendsTitle,
-        Constant.Title.groupsTitle,
-        Constant.Title.friendsTitle,
-        Constant.Title.workTitle,
-        Constant.Title.universityTitle
-    ]
     
     // MARK: - UI Components -
     
     private lazy var tabView: CustomTabView = {
-        let view = CustomTabView()
-        view.configure(with: tabsList)
+        let view = CustomTabView(tabs: Constant.defaultTabsList)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -52,7 +57,7 @@ final class MainScreen: UIViewController {
     
     private func setupTabView() {
         view.addSubview(tabView)
-        
+
         NSLayoutConstraint.activate([
             tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tabView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

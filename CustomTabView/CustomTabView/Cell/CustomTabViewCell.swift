@@ -8,24 +8,25 @@
 import UIKit
 
 final class CustomTabViewCell: UICollectionViewCell {
-    private enum Constant {
-        static let titleFontSize: CGFloat = 17
+    private struct Constant {
+        static let titleFontSize: CGFloat = 18
         static let titleNumberOfLines = 1
+        static let defaultHorizontalInset: CGFloat = 12
     }
     
     // MARK: - Properties -
     
-    static let identifier = "CustomTabViewCell"
+    static let identifier = String(describing: CustomTabViewCell.self)
     
     // MARK: - UI Components -
-
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = Constant.titleNumberOfLines
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: Constant.titleFontSize, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,13 +37,13 @@ final class CustomTabViewCell: UICollectionViewCell {
         
         setupView()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setupView()
     }
-
+    
     // MARK: - Internal -
     
     func configure(
@@ -52,6 +53,7 @@ final class CustomTabViewCell: UICollectionViewCell {
         defaultStateColor: UIColor
     ) {
         titleLabel.text = title
+        titleLabel.sizeToFit()
         titleLabel.textColor = isSelected ? selectedStateColor : defaultStateColor
     }
 }
@@ -63,8 +65,15 @@ private extension CustomTabViewCell {
         contentView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor,
+                constant: Constant.defaultHorizontalInset
+            ),
+            titleLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -Constant.defaultHorizontalInset
+            ),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
 }
