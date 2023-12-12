@@ -137,7 +137,7 @@ private extension CustomTabView {
             }
             collectionView.layoutIfNeeded()
             
-            let firstItemPath = IndexPath(item: .zero, section: .zero)
+            let firstItemPath = IndexPath(item: selectedIndex, section: .zero)
             
             collectionView.selectItem(
                 at: firstItemPath,
