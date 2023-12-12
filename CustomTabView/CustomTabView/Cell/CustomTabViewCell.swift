@@ -17,6 +17,8 @@ final class CustomTabViewCell: UICollectionViewCell {
     // MARK: - Properties -
     
     static let identifier = String(describing: CustomTabViewCell.self)
+    private var selectedStateColor: UIColor = .cyan
+    private var defaultStateColor: UIColor = .white
     
     // MARK: - UI Components -
     
@@ -24,7 +26,6 @@ final class CustomTabViewCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = Constant.titleNumberOfLines
         label.textAlignment = .center
-        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: Constant.titleFontSize, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,17 +45,26 @@ final class CustomTabViewCell: UICollectionViewCell {
         setupView()
     }
     
+    override var isSelected: Bool {
+        didSet {
+            updateTitleColor()
+        }
+    }
+    
     // MARK: - Internal -
     
     func configure(
         title: String,
-        isSelected: Bool,
         selectedStateColor: UIColor,
         defaultStateColor: UIColor
     ) {
         titleLabel.text = title
         titleLabel.sizeToFit()
-        titleLabel.textColor = isSelected ? selectedStateColor : defaultStateColor
+        
+        self.selectedStateColor = selectedStateColor
+        self.defaultStateColor = defaultStateColor
+
+        updateTitleColor()
     }
 }
 
@@ -75,5 +85,9 @@ private extension CustomTabViewCell {
             ),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
+    }
+    
+    func updateTitleColor() {
+        titleLabel.textColor = isSelected ? selectedStateColor : defaultStateColor
     }
 }

@@ -13,7 +13,7 @@ final class CustomTabView: UIView {
         static let maximumFullscreenTabsCount = 3
         static let selectionIndicatorCornerRadius: CGFloat = 2
         static let selectionIndicatorHeight: CGFloat = 4
-        static let selectionIndicatorAnimationTime = 0.1
+        static let selectionIndicatorAnimationTime = 0.2
         static let totalCellInset: CGFloat = 20
     }
     
@@ -22,11 +22,7 @@ final class CustomTabView: UIView {
     private var tabsList: [String] = []
     private var selectedCellTextColor: UIColor = .cyan
     private var defaultCellTextColor: UIColor = .white
-    private var selectedIndex: Int = .zero {
-        didSet {
-            reloadCollectionView()
-        }
-    }
+    private var selectedIndex: Int = .zero
     
     // MARK: - UI Components -
     
@@ -137,17 +133,19 @@ private extension CustomTabView {
         
         if tabsList.count > .zero {
             if isInitial {
-                collectionView.layoutIfNeeded()
-            } else {
-                reloadCollectionView()
+                collectionView.reloadData()
             }
-            updateIndicatorPosition(for: IndexPath(item: .zero, section: .zero))
+            collectionView.layoutIfNeeded()
+            
+            let firstItemPath = IndexPath(item: .zero, section: .zero)
+            
+            collectionView.selectItem(
+                at: firstItemPath,
+                animated: true, 
+                scrollPosition: .centeredHorizontally
+            )
+            updateIndicatorPosition(for: firstItemPath)
         }
-    }
-    
-    func reloadCollectionView() {
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
     }
     
     func determineItemWidthForFullscreen() -> CGFloat {
@@ -172,7 +170,7 @@ private extension CustomTabView {
             return
         }
         
-        let indicatorFrameWidth = layoutAttributes.bounds.width - Constant.totalCellInset
+        let indicatorFrameWidth = layoutAttributes.frame.width - Constant.totalCellInset
         let indicatorFrameX = layoutAttributes.center.x - (indicatorFrameWidth / 2)
         let indicatorFrameY = layoutAttributes.bounds.height - Constant.selectionIndicatorHeight
         
@@ -187,7 +185,8 @@ private extension CustomTabView {
     }
     
     func updateIndicatorPositionWithAnimation(for frame: CGRect) {
-        UIView.animate(withDuration: Constant.selectionIndicatorAnimationTime) {
+        UIView.animate(withDuration: Constant.selectionIndicatorAnimationTime)
+        {
             self.selectionIndicatorView.frame = frame
         }
     }
@@ -228,7 +227,6 @@ extension CustomTabView: UICollectionViewDataSource {
         
         cell.configure(
             title: tabsList[indexPath.item],
-            isSelected: selectedIndex == indexPath.item,
             selectedStateColor: selectedCellTextColor,
             defaultStateColor: defaultCellTextColor
         )
@@ -244,8 +242,13 @@ extension CustomTabView: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        selectedIndex = indexPath.item
-        
+        collectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
         updateIndicatorPosition(for: indexPath)
+        
+        selectedIndex = indexPath.item
     }
 }
