@@ -11,15 +11,21 @@
 		9A0CC0272B064CE9003C2E4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0CC0262B064CE9003C2E4B /* SceneDelegate.swift */; };
 		9A0CC02E2B064CEB003C2E4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */; };
 		9A0CC0312B064CEB003C2E4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A0CC02F2B064CEB003C2E4B /* LaunchScreen.storyboard */; };
+		9A0CC0432B06512E003C2E4B /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0CC0402B06512E003C2E4B /* CustomTabView.swift */; };
+		9A0CC0442B06512E003C2E4B /* CustomTabViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0CC0422B06512E003C2E4B /* CustomTabViewCell.swift */; };
+		9A0CC0472B065EF0003C2E4B /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0CC0462B065EF0003C2E4B /* MainScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9A0CC0212B064CE9003C2E4B /* CustomCollectionViewBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomCollectionViewBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A0CC0212B064CE9003C2E4B /* CustomTabView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTabView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0CC0242B064CE9003C2E4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A0CC0262B064CE9003C2E4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A0CC0302B064CEB003C2E4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A0CC0322B064CEB003C2E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A0CC0402B06512E003C2E4B /* CustomTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		9A0CC0422B06512E003C2E4B /* CustomTabViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabViewCell.swift; sourceTree = "<group>"; };
+		9A0CC0462B065EF0003C2E4B /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +42,7 @@
 		9A0CC0182B064CE9003C2E4B = {
 			isa = PBXGroup;
 			children = (
-				9A0CC0232B064CE9003C2E4B /* CustomCollectionViewBar */,
+				9A0CC0232B064CE9003C2E4B /* CustomTabView */,
 				9A0CC0222B064CE9003C2E4B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,37 +50,72 @@
 		9A0CC0222B064CE9003C2E4B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9A0CC0212B064CE9003C2E4B /* CustomCollectionViewBar.app */,
+				9A0CC0212B064CE9003C2E4B /* CustomTabView.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9A0CC0232B064CE9003C2E4B /* CustomCollectionViewBar */ = {
+		9A0CC0232B064CE9003C2E4B /* CustomTabView */ = {
 			isa = PBXGroup;
 			children = (
-				9A0CC0382B064CF4003C2E4B /* App&SceneDelegate */,
-				9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */,
-				9A0CC02F2B064CEB003C2E4B /* LaunchScreen.storyboard */,
+				9A0CC0382B064CF4003C2E4B /* App */,
+				9A0CC0452B065ED9003C2E4B /* Scenes */,
+				9A0CC03F2B06512E003C2E4B /* CustomTabView */,
+				9A9D54FE2B1A1F83004E45AF /* Supporting */,
 				9A0CC0322B064CEB003C2E4B /* Info.plist */,
 			);
-			path = CustomCollectionViewBar;
+			path = CustomTabView;
 			sourceTree = "<group>";
 		};
-		9A0CC0382B064CF4003C2E4B /* App&SceneDelegate */ = {
+		9A0CC0382B064CF4003C2E4B /* App */ = {
 			isa = PBXGroup;
 			children = (
 				9A0CC0242B064CE9003C2E4B /* AppDelegate.swift */,
 				9A0CC0262B064CE9003C2E4B /* SceneDelegate.swift */,
 			);
-			path = "App&SceneDelegate";
+			path = App;
+			sourceTree = "<group>";
+		};
+		9A0CC03F2B06512E003C2E4B /* CustomTabView */ = {
+			isa = PBXGroup;
+			children = (
+				9A0CC0402B06512E003C2E4B /* CustomTabView.swift */,
+				9A0CC0412B06512E003C2E4B /* Cell */,
+			);
+			path = CustomTabView;
+			sourceTree = "<group>";
+		};
+		9A0CC0412B06512E003C2E4B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9A0CC0422B06512E003C2E4B /* CustomTabViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9A0CC0452B065ED9003C2E4B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9A0CC0462B065EF0003C2E4B /* MainScreen.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		9A9D54FE2B1A1F83004E45AF /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				9A0CC02D2B064CEB003C2E4B /* Assets.xcassets */,
+				9A0CC02F2B064CEB003C2E4B /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9A0CC0202B064CE9003C2E4B /* CustomCollectionViewBar */ = {
+		9A0CC0202B064CE9003C2E4B /* CustomTabView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A0CC0352B064CEB003C2E4B /* Build configuration list for PBXNativeTarget "CustomCollectionViewBar" */;
+			buildConfigurationList = 9A0CC0352B064CEB003C2E4B /* Build configuration list for PBXNativeTarget "CustomTabView" */;
 			buildPhases = (
 				9A0CC01D2B064CE9003C2E4B /* Sources */,
 				9A0CC01E2B064CE9003C2E4B /* Frameworks */,
@@ -84,9 +125,9 @@
 			);
 			dependencies = (
 			);
-			name = CustomCollectionViewBar;
+			name = CustomTabView;
 			productName = CustomCollectionViewBar;
-			productReference = 9A0CC0212B064CE9003C2E4B /* CustomCollectionViewBar.app */;
+			productReference = 9A0CC0212B064CE9003C2E4B /* CustomTabView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +145,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9A0CC01C2B064CE9003C2E4B /* Build configuration list for PBXProject "CustomCollectionViewBar" */;
+			buildConfigurationList = 9A0CC01C2B064CE9003C2E4B /* Build configuration list for PBXProject "CustomTabView" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,7 +158,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9A0CC0202B064CE9003C2E4B /* CustomCollectionViewBar */,
+				9A0CC0202B064CE9003C2E4B /* CustomTabView */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +180,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0CC0432B06512E003C2E4B /* CustomTabView.swift in Sources */,
+				9A0CC0442B06512E003C2E4B /* CustomTabViewCell.swift in Sources */,
+				9A0CC0472B065EF0003C2E4B /* MainScreen.swift in Sources */,
 				9A0CC0252B064CE9003C2E4B /* AppDelegate.swift in Sources */,
 				9A0CC0272B064CE9003C2E4B /* SceneDelegate.swift in Sources */,
 			);
@@ -281,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9A2Y9UTZLK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomCollectionViewBar/Info.plist;
+				INFOPLIST_FILE = CustomTabView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -291,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomCollectionViewBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomTabView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -308,7 +352,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9A2Y9UTZLK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CustomCollectionViewBar/Info.plist;
+				INFOPLIST_FILE = CustomTabView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -318,7 +362,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomCollectionViewBar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.niestierov.CustomTabView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -329,7 +373,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9A0CC01C2B064CE9003C2E4B /* Build configuration list for PBXProject "CustomCollectionViewBar" */ = {
+		9A0CC01C2B064CE9003C2E4B /* Build configuration list for PBXProject "CustomTabView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9A0CC0332B064CEB003C2E4B /* Debug */,
@@ -338,7 +382,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9A0CC0352B064CEB003C2E4B /* Build configuration list for PBXNativeTarget "CustomCollectionViewBar" */ = {
+		9A0CC0352B064CEB003C2E4B /* Build configuration list for PBXNativeTarget "CustomTabView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9A0CC0362B064CEB003C2E4B /* Debug */,
